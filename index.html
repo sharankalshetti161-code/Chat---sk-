@@ -1,75 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="mr">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SK Chat</title>
 
 <style>
+*{
+  box-sizing:border-box;
+}
+
 body{
- margin:0;
- background:#212121;
- color:white;
- font-family:Arial;
+  margin:0;
+  background:#212121;
+  color:white;
+  font-family:Arial,sans-serif;
 }
 
 header{
- padding:18px;
- font-size:22px;
- font-weight:bold;
- border-bottom:1px solid #444;
+  height:60px;
+  display:flex;
+  align-items:center;
+  padding:0 18px;
+  font-size:22px;
+  font-weight:bold;
+  border-bottom:1px solid #444;
 }
 
 #chat{
- padding:15px;
- padding-bottom:90px;
+  padding:15px;
+  padding-bottom:90px;
+  max-width:900px;
+  margin:auto;
 }
 
 .msg{
- max-width:800px;
- margin:12px auto;
- padding:15px;
- border-radius:12px;
- white-space:pre-wrap;
+  padding:14px 16px;
+  margin:12px 0;
+  border-radius:14px;
+  white-space:pre-wrap;
+  line-height:1.5;
 }
 
 .user{
- background:#343541;
+  background:#343541;
 }
 
 .bot{
- background:#2b2b2b;
+  background:#2b2b2b;
 }
 
 .box{
- position:fixed;
- bottom:0;
- left:0;
- right:0;
- padding:10px;
- background:#212121;
- display:flex;
- gap:8px;
+  position:fixed;
+  bottom:0;
+  left:0;
+  right:0;
+  display:flex;
+  gap:8px;
+  padding:10px;
+  background:#212121;
+  border-top:1px solid #444;
 }
 
 textarea{
- flex:1;
- height:45px;
- border-radius:12px;
- background:#303030;
- color:white;
- border:1px solid #555;
- padding:10px;
- font-size:16px;
+  flex:1;
+  height:48px;
+  resize:none;
+  border-radius:14px;
+  border:1px solid #555;
+  background:#303030;
+  color:white;
+  padding:12px;
+  font-size:16px;
+  outline:none;
 }
 
 button{
- width:60px;
- border:0;
- border-radius:12px;
- background:#10a37f;
- color:white;
- font-size:20px;
+  width:55px;
+  border:0;
+  border-radius:14px;
+  background:#10a37f;
+  color:white;
+  font-size:22px;
+}
+
+button:active{
+  transform:scale(.95);
 }
 </style>
 </head>
@@ -83,6 +99,7 @@ button{
 <div class="msg bot">
 नमस्कार! 👋
 मी SK Chat आहे.
+
 मला काहीही विचार.
 </div>
 
@@ -103,63 +120,55 @@ placeholder="Message SK Chat..."
 
 function send(){
 
- const input=document.getElementById("input");
- const text=input.value.trim();
+const input = document.getElementById("input");
+const text = input.value.trim();
 
- if(!text)return;
+if(!text) return;
 
- add("You",text,"user");
+addMessage(text,"user");
 
- input.value="";
+input.value = "";
 
- setTimeout(function(){
+setTimeout(function(){
 
-   add(
-     "SK Chat",
-     answer(text),
-     "bot"
-   );
+addMessage(
+"तुझा प्रश्न मिळाला 👍\nAI जोडण्यासाठी पुढची setup करायची आहे.",
+"bot"
+);
 
- },500);
-
-}
-
-function add(name,text,type){
-
- const chat=document.getElementById("chat");
-
- const div=document.createElement("div");
-
- div.className="msg "+type;
-
- div.textContent=name+"\n"+text;
-
- chat.appendChild(div);
-
- chat.scrollTop=chat.scrollHeight;
+},500);
 
 }
 
-function answer(text){
+function addMessage(text,type){
 
- const q=text.toLowerCase();
+const chat = document.getElementById("chat");
 
- if(q.includes("hi")||q.includes("hello"))
-   return "Hello! 👋 मी SK Chat आहे.";
+const div = document.createElement("div");
 
- if(q.includes("name")||q.includes("नाव"))
-   return "माझं नाव SK Chat आहे. 🤖";
+div.className = "msg " + type;
 
- if(q.includes("html"))
-   return "HTML वापरून website तयार करता येते.";
+div.textContent = text;
 
- if(q.includes("game")||q.includes("गेम"))
-   return "JavaScript वापरून browser game तयार करता येतो. 🎮";
+chat.appendChild(div);
 
- return "तुझा प्रश्न मिळाला 👍\n\nहा सध्या मोफत SK Chat demo आहे.";
+window.scrollTo(0,document.body.scrollHeight);
+
 }
+
+document.getElementById("input").addEventListener("keydown",function(e){
+
+if(e.key === "Enter" && !e.shiftKey){
+
+e.preventDefault();
+
+send();
+
+}
+
+});
 
 </script>
 
 </body>
-  </html>
+</html>
