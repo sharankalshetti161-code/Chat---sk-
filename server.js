@@ -31,7 +31,7 @@ app.post("/chat", async (req, res) => {
           messages: [
             {
               role: "system",
-              content: "You are SK Chat, a helpful AI assistant. Answer clearly and naturally."
+              content: "You are SK Chat, a helpful AI assistant. Understand and respond naturally in the same language the user uses. Support Marathi, Hindi, English, and other languages whenever possible. If the user asks in a specific language, answer in that language."
             },
             {
               role: "user",
