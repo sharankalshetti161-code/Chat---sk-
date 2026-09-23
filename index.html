@@ -177,15 +177,42 @@ textarea{
   </div>
 </div>
 
-<div class="box">
+<<div class="box">
+
+  <button type="button" class="side-btn" onclick="document.getElementById('photo').click()">📷</button>
+
+  <input type="file" id="photo" accept="image/*" style="display:none">
+
+  <button type="button" class="side-btn" onclick="startMic()">🎙️</button>
+
   <textarea id="input" placeholder="Message SK Chat..."></textarea>
-  <button class="send-btn" onclick="send()">➤</button>
+
+  <button type="button" class="send-btn" onclick="send()">➤</button>
+
 </div>
 
 <script>
 
 let currentMessages = [];
+function startMic(){
+  if(!("webkitSpeechRecognition" in window)){
+    alert("तुझ्या browser मध्ये voice typing support नाही.");
+    return;
+  }
 
+  const recognition = new webkitSpeechRecognition();
+
+  recognition.lang = "mr-IN";
+  recognition.continuous = false;
+  recognition.interimResults = false;
+
+  recognition.onresult = function(event){
+    document.getElementById("input").value =
+      event.results[0][0].transcript;
+  };
+
+  recognition.start();
+}
 function addMessage(text,type){
   const chat=document.getElementById("chat");
 
