@@ -201,6 +201,7 @@ textarea{
   <button type="button" class="send-btn" onclick="send()">➤</button>
 
 </div>
+  <script>
 async function sendPhoto(input) {
   const file = input.files[0];
 
@@ -255,7 +256,8 @@ chat.scrollTop = chat.scrollHeight;
 
   reader.readAsDataURL(file);
 }
-<script>
+</script>
+  <script>
 
 let currentMessages = [];
 function startMic(){
