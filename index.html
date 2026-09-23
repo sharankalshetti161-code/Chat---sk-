@@ -190,7 +190,7 @@ textarea{
 
   <button type="button" class="side-btn" onclick="document.getElementById('photo').click()">📷</button>
 
-  <input type="file" id="photo" accept="image/*" style="display:none">
+  <input type="file" id="photo" accept="image/*" style="display:none" onchange="sendPhoto(this)">
 
   <button type="button" class="side-btn" onclick="startMic()">🎙️</button>
 
