@@ -209,7 +209,20 @@ async function sendPhoto(input) {
   reader.onload = async function () {
     const image = reader.result;
 
-    addMessage("📷 फोटो पाठवला...", "user");
+  const chat = document.getElementById("chat");
+
+const photoBox = document.createElement("div");
+photoBox.className = "msg user";
+
+const photoImg = document.createElement("img");
+photoImg.src = image;
+photoImg.style.maxWidth = "220px";
+photoImg.style.borderRadius = "12px";
+photoImg.style.display = "block";
+
+photoBox.appendChild(photoImg);
+chat.appendChild(photoBox);
+chat.scrollTop = chat.scrollHeight;
 
     try {
       const response = await fetch(
