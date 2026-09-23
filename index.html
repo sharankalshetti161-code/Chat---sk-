@@ -211,7 +211,7 @@ function startMic(){
 
   const recognition = new webkitSpeechRecognition();
 
-  recognition.lang = "mr-IN";
+  recognition.lang = navigator.language || "en-IN";
   recognition.continuous = false;
   recognition.interimResults = false;
 
